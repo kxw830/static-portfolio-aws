@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - "website/**"
-      - ".github/workflows/deplay-s3.yml"
+      - ".github/workflows/deploy-s3.yml"
 
 permissions:
   id-token: write
