@@ -1,0 +1,5 @@
+name: Update website in S3
+
+on:
+  push:
+    branches: [ "main" ]
