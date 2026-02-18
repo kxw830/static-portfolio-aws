@@ -3,3 +3,30 @@ name: Update website in S3
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "website/**"
+      - ".github/workflows/deplay-s3.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3 using sync
+        run: |
+          aws s3 sync ./website s3://${{ secrets.S3_BUCKET_NAME }} \
+            --delete \
+            --exclude ".vscode/*"
+            --exclude "**/*.md"
