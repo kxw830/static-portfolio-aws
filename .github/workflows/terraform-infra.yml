@@ -1,0 +1,42 @@
+name: Terraform Apply 
+
+on:
+    push:
+        branches: [ "main" ]
+        paths:
+            - "infra/**"
+            - ".github/workflows/terraform-infra.yml"
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    apply:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: infra
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Configure AWS using OIDC
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+                aws-region: ${{ secrets.AWS_REGION }}
+
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+
+            - name: Terraform Init
+              run: terraform init
+
+            - name: Terraform Apply
+              env:
+                TF_VAR_bucket_name: ${{ secrets.TF_VAR_bucket_name }}
+              run: terraform apply -auto-approve
+
+        
