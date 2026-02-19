@@ -612,6 +612,7 @@ span{
     top: 0;
     left: -1.1rem;
     width: 2rem;
+    height: 2rem;
     background: var(--main-color);
     border-radius: 50%;
       
@@ -1154,7 +1155,7 @@ section:nth-child(odd) .animate.scroll{
 }
 .about.show-animate .animate.scroll,
 .education.show-animate .animate.scroll,
-.skills.show-animate .animate.scroll
+.skills.show-animate .animate.scroll,
 .footer.show-animate .animate.scroll{
     transition-delay: calc(0.3s * var(--i));
     width: 0;
@@ -1192,7 +1193,7 @@ section:nth-child(odd) .animate.scroll{
     .navbar{
         position: absolute;
         top: 100%;
-        left: -100;
+        left: -100%;
         width: 100%;
         padding: 1rem 4%;
         background: var(--main-color);
