@@ -46,4 +46,4 @@ jobs:
             --exclude "**/*.md"
 
       - name: Invalidate CloudFront cache after sync
-        run: aws cloudfront create-invalidation --distribution-id ${{ steps.tf.outputs.distribution_id }} --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ steps.tf.outputs.dist_id }} --paths "/*"
