@@ -38,5 +38,3 @@ jobs:
               env:
                 TF_VAR_bucket_name: ${{ secrets.TF_VAR_bucket_name }}
               run: terraform apply -auto-approve
-
-        
