@@ -28,5 +28,5 @@ jobs:
         run: |
           aws s3 sync ./website s3://${{ secrets.S3_BUCKET_NAME }} \
             --delete \
-            --exclude ".vscode/*"
+            --exclude ".vscode/*" \
             --exclude "**/*.md"
