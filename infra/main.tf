@@ -1,6 +1,14 @@
 terraform {
   required_version = ">= 1.5.0"
 
+  backend "s3" {
+    bucket         = "static-portfolio-aws-tfstate-bucket"
+    key            = "static-portfolio-aws/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "static-portfolio-aws-tflock"
+    encrypt        = true
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"

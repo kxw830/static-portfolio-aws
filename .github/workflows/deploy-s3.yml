@@ -24,9 +24,26 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: infra
+        run: terraform init
+
+      - name: Read bucket name and CloudFront distribution ID
+        id: tf
+        working-directory: infra
+        run: |
+          echo "bucket=$(terraform output -raw bucket_name)" >> $GITHUB_OUTPUT
+          echo "dist_id=$(terraform output -raw distribution_id)" >> $GITHUB_OUTPUT
+
       - name: Deploy to S3 using sync
         run: |
-          aws s3 sync ./website s3://${{ secrets.S3_BUCKET_NAME }} \
+          aws s3 sync ./website s3://${{ steps.tf.outputs.bucket }} \
             --delete \
             --exclude ".vscode/*" \
             --exclude "**/*.md"
+
+      - name: Invalidate CloudFront cache after sync
+        run: aws cloudfront create-invalidation --distribution-id ${{ steps.tf.outputs.distribution_id }} --paths "/*"
