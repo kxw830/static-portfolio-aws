@@ -770,10 +770,34 @@ span{
 }
 
 /* Make every portfolio card the same size */
-.portfolio-container .portfolio-box{
+/* .portfolio-container .portfolio-box{
   width: 100%;
   aspect-ratio: 3 / 2;
   overflow: hidden;
+} */
+
+.portfolio-container .portfolio-box{
+  width: 100%;
+  aspect-ratio: 3 / 2;                 /* match comingsoon.jpg */
+  overflow: hidden;
+  border-radius: 1.6rem;
+
+  border: 2px solid rgba(165, 75, 255, 0.7); /* border line */
+  box-shadow: 0 0 1rem rgba(165, 75, 255, 0.35);
+
+  position: relative;
+}
+
+/* IMPORTANT: force image to FILL the tile */
+.portfolio-container .portfolio-box img{
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  object-fit: cover;       /* crops to fill */
+  object-position: center; /* keeps center in view */
+
+  transition: .5s ease;
 }
 
 .portfolio-box img{
