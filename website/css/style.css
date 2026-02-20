@@ -612,7 +612,6 @@ span{
     top: 0;
     left: -1.1rem;
     width: 2rem;
-    height: 2rem;
     background: var(--main-color);
     border-radius: 50%;
       
@@ -762,46 +761,28 @@ span{
   .portfolio h2{
     margin-bottom:4rem ;
   }
-.portfolio-container {
+  .portfolio-container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: stretch;
+    grid-template-columns:repeat(3,1fr) ;
+    align-items: center;
     gap: 2.5rem;
-}
 
-/* Make every portfolio card the same size */
-/* .portfolio-container .portfolio-box{
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-} */
-
-.portfolio-container .portfolio-box{
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-}
-
-/* IMPORTANT: force image to FILL the tile */
-.portfolio-container .portfolio-box img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;        /* fills entire box */
-  object-position: center;  /* crops evenly */
-  display: block;
-}
-
-.portfolio-box img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;      /* no crop */
-  object-position: center;
-  display: block;
-  background: #000;         /* fills empty space */
-  transform: none;
-}
-.portfolio-box:hover img{
-  transform: none !important;
-}
+  }
+ .portfolio-container .portfolio-box{
+    position: relative;
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem var(--main-color);
+    overflow: hidden;
+    display: flex;
+    
+ }
+ .portfolio-box img{
+    width: 100%;
+    transition: .5s ease;
+ }
+ .portfolio-box:hover img{
+    transform:scale(1.1) ;
+ }
  .portfolio-box .portfolio-layer{
     position: absolute;
     bottom: 0;
@@ -1164,7 +1145,7 @@ section:nth-child(odd) .animate.scroll{
 }
 .about.show-animate .animate.scroll,
 .education.show-animate .animate.scroll,
-.skills.show-animate .animate.scroll,
+.skills.show-animate .animate.scroll
 .footer.show-animate .animate.scroll{
     transition-delay: calc(0.3s * var(--i));
     width: 0;
@@ -1202,7 +1183,7 @@ section:nth-child(odd) .animate.scroll{
     .navbar{
         position: absolute;
         top: 100%;
-        left: -100%;
+        left: -100;
         width: 100%;
         padding: 1rem 4%;
         background: var(--main-color);
